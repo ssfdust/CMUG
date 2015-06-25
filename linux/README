@@ -1,0 +1,8 @@
+Install:
+mkdir build && cd build
+../configure --prefix=/usr/share
+make
+# make install
+
+Unstall:
+# make unistall
