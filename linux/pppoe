@@ -1,8 +1,8 @@
 Description='Example PPPoE connection'
 Interface=eth0
 Connection=pppoe
-User='example@yourprovider.com'
-Password='very secret'
+User='user'
+Password='passwd'
 
 # Always keep a connection established
 ConnectionMode='persist'
