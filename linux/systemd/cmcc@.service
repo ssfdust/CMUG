@@ -1,0 +1,14 @@
+[Unit]
+Description=Networking for netctl profile cmcc on %I
+Documentation=man:netctl.profile(5)
+Before=network.target netctl.service
+Wants=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStartPre=/usr/share/cmug/cmug -i %I
+ExecStartPre=/usr/bin/ip link set %I down
+ExecStartPre=/usr/bin/cp /usr/share/cmug/pppoe.conf /etc/netctl/cmcc
+ExecStart=/usr/lib/network/network start cmcc
+ExecStop=/usr/lib/network/network stop cmcc
