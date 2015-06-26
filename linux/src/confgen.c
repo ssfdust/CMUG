@@ -40,7 +40,7 @@ int ch_settings(char * username, char * passwd,
 	{
 		str_sub(buffer, "user", username);
 		str_sub(buffer, "passwd", passwd);
-		if (interface != NULL)
+		if (strcmp(interface, "") != 0)
 			str_sub(buffer, "eth0", interface);
 		fputs(buffer, fout);
 	}
@@ -52,7 +52,7 @@ int str_sub(char * str, const char * from, const char * to)
 	char buffer[1024];
 	char * p = strstr(str, from);
 	if ( p == NULL)
-		return str;
+		return 1;
 	strncpy(buffer, str, p - str);
 	buffer[p-str] = '\0';
 	sprintf(buffer + (p - str), "%s%s", to, p + strlen(from));
@@ -79,46 +79,12 @@ char * get_curpath(void)
 	return curfilename;
 }
 /*
-int parse_opt(int opt)
-{
-	switch(opt)
-	{
-		case 'U':
-		case 'u':config->username = strdup(optarg);
-						 break;
-		case 'P':
-		case 'p':config->password = strdup(optarg);
-						 break;
-		case 'I':
-		case 'i':config->interface = strdup(optarg);
-						 break;
-	}
-}
 */
 /*
 int main(int argc, char *argv[])
 {
-	int opt;
-	int option_index = 0;
-	char * optstring = "u:p:i:h";
 	FILE * fp;
 	FILE * fout;
-	static const struct option opts[] = 
-	{
-		{"user", required_argument, 0, 'U'},
-		{"passwd", required_argument, 0, 'P'},
-		{"interface", required_argument, 0, 'I'},
-		{"help", no_argument, 0, 'H'},
-		{0, 0, 0, 0}
-	};
-	while((opt = getopt_long(argc, argv, optstring, opts, &option_index)) != -1) {
-		if(opt == 0) {
-			continue;
-		} else if(opt == '?') {
-			return 1;
-		}
-		parse_opt(opt);
-	}
 	
 	puts(get_curpath());
 	printf("User: %s\n"

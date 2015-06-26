@@ -12,6 +12,5 @@ typedef struct config_new {
 
 
 FILE * read_config(char *);
-char * str_sub(char * str, const char * from, const char * to);
+int str_sub(char * str, const char * from, const char * to);
 char * get_curpath(void);
-int parse_opt(int);

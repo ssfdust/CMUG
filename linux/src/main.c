@@ -8,7 +8,6 @@
 #include "confgen.h"
 #define STRLEN 45
 #define PASSWD 8
-
 /* global config struct */ config_t * config; 
 int main(int argc, char *argv[])
 {
@@ -28,15 +27,22 @@ int main(int argc, char *argv[])
                     "5. 财经学院",
                     "6 .淮师王营校区"
     };
-    int ct;
+    int ct; 
+		config = (config_t *)malloc(sizeof(config_t));
 
+		parse_options(argc, argv, &newuser);
     if ((fdata = fopen(strcat(get_curpath(), "user.dat"), "rb")) == NULL)
     {
-
+			if (strcmp(newuser.username, "") == 0)
+			{
         puts("请输入用户名：");
         gets(newuser.username);
+			}
+			if (strcmp(newuser.passwd, "") == 0)
+			{
         puts("请输入密码：");
         gets(newuser.passwd);
+			}
         puts("选择校区(1-6)");
         for (ct = 0;ct < CHOICE;ct++)
             puts(menu[ct]);
@@ -71,7 +77,6 @@ int main(int argc, char *argv[])
     uuid_create(&temp);
     uid = uuid_to_string(&temp);
 		s = encodeUsername(uid, newuser.school, newuser);
-		config = (config_t *)malloc(sizeof(config_t));
     strcpy(config->username, s);
 		strcpy(config->password, newuser.passwd);
 
@@ -89,4 +94,61 @@ int main(int argc, char *argv[])
     fclose(fo);
 
     return 0;
+}
+
+int parse_options(int argc, char * argv[], user * newuser)
+{
+	int opt;
+	int option_index = 0;
+	char * optstring = "u:p:i:nh";
+	static const struct option opts[] = 
+	{
+		{"user", required_argument, 0, 'U'},
+		{"passwd", required_argument, 0, 'P'},
+		{"interface", required_argument, 0, 'I'},
+		{"new", no_argument, 0, 'N'},
+		{"help", no_argument, 0, 'H'},
+		{0, 0, 0, 0}
+	};
+	while((opt = getopt_long(argc, argv, optstring, opts, &option_index)) != -1) {
+		if(opt == 0) {
+			continue;
+		} else if(opt == '?') {
+			usage();
+			exit(2);
+		}
+		parse_opt(opt, newuser);
+	}
+	return 0;
+}
+int parse_opt(int opt, user * newuser)
+{
+	switch(opt)
+	{
+		case 'U':
+		case 'u':strcpy(newuser->username, strdup(optarg));
+						 break;
+		case 'P':
+		case 'p':strcpy(newuser->passwd, strdup(optarg));
+						 break;
+		case 'I':
+		case 'i':strcpy(config->interface, strdup(optarg));
+						 break;
+		case 'N':
+		case 'n':remove(strcat(get_curpath(), "user.dat"));
+						 break;
+		case 'H':
+		case 'h':usage();
+	}
+}
+
+
+void usage(void)
+{
+	printf("Usage:  %s [OPTION]...\n");
+	printf("     -u, --username[=USERNAME] %-s\n","set your USERNAME");
+	printf("     -p, --passwd[=PASSWORD] %-s\n","set your PASSWORD");
+	printf("     -i, --interface[=INTERFACE] %-s\n","set your network INTERFACE,default eth0");
+	printf("     -n, --new %-s\n","create new user");
+	printf("     -h, --help %-s\n","print the help message");
 }

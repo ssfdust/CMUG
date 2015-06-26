@@ -7,6 +7,9 @@ typedef struct nuser {
     char passwd[PASSWD];
 } user;
 
+int parse_opt(int, user *);
+int parse_options(int argc, char * argv[], user * newuser);
+void usage(void);
 /*
  * Collect user information
  * Username
