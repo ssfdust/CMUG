@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -25,7 +26,7 @@ FILE * read_config(char * file)
 		if ((fp = fopen(SYSCONFIG, "r")) == NULL)
 		{
 			fprintf(stderr, "can't open file %s", SYSCONFIG);
-			exit (0);
+			exit(2);
 		}
 	}
 	return fp;

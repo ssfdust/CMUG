@@ -36,12 +36,12 @@ int main(int argc, char *argv[])
 			if (strcmp(newuser.username, "") == 0)
 			{
         puts("请输入用户名：");
-        gets(newuser.username);
+        scanf("%s", &newuser.username);
 			}
 			if (strcmp(newuser.passwd, "") == 0)
 			{
         puts("请输入密码：");
-        gets(newuser.passwd);
+        scanf("%s", &newuser.passwd);
 			}
         puts("选择校区(1-6)");
         for (ct = 0;ct < CHOICE;ct++)
@@ -139,16 +139,18 @@ int parse_opt(int opt, user * newuser)
 						 break;
 		case 'H':
 		case 'h':usage();
+						 exit(2);
+						 break;
 	}
 }
 
 
 void usage(void)
 {
-	printf("Usage:  %s [OPTION]...\n");
-	printf("     -u, --username[=USERNAME] %-s\n","set your USERNAME");
-	printf("     -p, --passwd[=PASSWORD] %-s\n","set your PASSWORD");
-	printf("     -i, --interface[=INTERFACE] %-s\n","set your network INTERFACE,default eth0");
+	printf("Usage:  cmug [OPTION]...\n" );
+	printf("     -u, --username[=USERNAME] %-20s\n","set your USERNAME");
+	printf("     -p, --passwd[=PASSWORD] %-20s\n","set your PASSWORD");
+	printf("     -i, --interface[=INTERFACE] %-20s\n","set your network INTERFACE,default eth0");
 	printf("     -n, --new %-s\n","create new user");
 	printf("     -h, --help %-s\n","print the help message");
 }

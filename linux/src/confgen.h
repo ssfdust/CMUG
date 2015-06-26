@@ -14,3 +14,5 @@ typedef struct config_new {
 FILE * read_config(char *);
 int str_sub(char * str, const char * from, const char * to);
 char * get_curpath(void);
+int ch_settings(char * username, char * passwd, 
+								char * interface, FILE * fp, FILE * fout);
