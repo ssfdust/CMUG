@@ -42,13 +42,12 @@ int ch_settings(char * username, char * passwd,
 		str_sub(buffer, "passwd", passwd);
 		if (interface != NULL)
 			str_sub(buffer, "eth0", interface);
-		puts(buffer);
 		fputs(buffer, fout);
 	}
 	return 0;
 }
 
-char * str_sub(char * str, const char * from, const char * to)
+int str_sub(char * str, const char * from, const char * to)
 {
 	char buffer[1024];
 	char * p = strstr(str, from);
@@ -58,7 +57,7 @@ char * str_sub(char * str, const char * from, const char * to)
 	buffer[p-str] = '\0';
 	sprintf(buffer + (p - str), "%s%s", to, p + strlen(from));
 	strcpy(str, buffer);
-	return buffer;
+	return 0;
 }
 char * get_curpath(void)
 {

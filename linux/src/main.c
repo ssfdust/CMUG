@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <getopt.h>
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -9,7 +10,7 @@
 #define PASSWD 8
 
 /* global config struct */ config_t * config; 
-int main()
+int main(int argc, char *argv[])
 {
     char *uid;
     char * s;
@@ -78,7 +79,7 @@ int main()
     fprintf(fo, "User %s\nPassword %s", config->username, newuser.passwd);
 		
 		fp = read_config("pppoe");
-		if ((fout = fopen("pppoe.conf", "w")) == NULL)
+		if ((fout = fopen(strcat(get_curpath(), "pppoe.conf"), "w")) == NULL)
 			fprintf(stderr, "can't open the file");
 		ch_settings(config->username, config->password, config->interface, fp, fout);
 		fclose(fp);
