@@ -1,21 +1,51 @@
 Linux下安装
 ================
-* 本来这个软件只能生成用户名密码，现在我增加了自动连接的指令 
-* 但是仅仅支持netctl+systemd的组合，换句话说，默认只支持archlinux.. 
-* 不过最新版Ubuntu应该也是可以安装的netctl的 
+# 说明 #
+本来这个软件只能生成用户名密码，现在我增加了自动连接的指令 
+但是仅仅支持netctl+systemd的组合，换句话说，默认只支持archlinux.. 
+不过最新版Ubuntu应该也是可以安装的netctl的 
 
-非Archlinux下安装netctl:
-	git clone git://projects.archlinux.org/netctl.git
-	cd netctl
-	make install
-	#下面两行为安装自动补全支持可以不执行
-	install -D -m644 contrib/bash-completion "/usr/share/bash-completion/completions/netctl"
-	install -D -m644 contrib/zsh-completion "/usr/share/zsh/site-functions/_netctl"
-安装CMCC:
-	mkdir build && cd build
+# 依赖 #
+* netctl
+	+ coreutils
+	+ iproute2
+	+ openresolv
+	+ systemd
+	+ pkg-config
+* CMCC
+	+ netctl
+	+ make
+	+ ppp
+	+ pkg-config
+	+ automake
+	+ autoconf
+	+ gcc
+
+# 非Archlinux下安装netctl: #
+    git clone git://projects.archlinux.org/netctl.git
+    cd netctl
+    make install
+    #下面两行为安装自动补全支持可以不执行
+    install -D -m644 contrib/bash-completion "/usr/share/bash-completion/completions/netctl"
+    install -D -m644 contrib/zsh-completion "/usr/share/zsh/site-functions/_netctl"
+# 安装CMCC: #
+    git clone https://github.com/ssfdust/CMUG.git
+    cd linux
+    mkdir build && cd build
 		../configure --prefix=/usr/share
 		make
 		# make install
 
-卸载CMCC：
+# 卸载CMCC：#
 		# make unistall
+
+# 使用：#
+初次使用：
+    cmug -i INTERFACE
+    cmug -u USERNAME -i INTERFACE -p PASSWORD -s SCHOOL_NUMBER
+创建新用户：
+    cmug -n -i INTERFACE
+    cmug -u USERNAME -i INTERFACE -p PASSWORD -s SCHOOL_NUMBER
+利用systemd自动脚本：
+    # systemctl start cmcc@INTERFACE  #连接
+    # systemctl stop cmcc@INTERFACE   #关闭
