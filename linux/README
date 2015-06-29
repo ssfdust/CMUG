@@ -4,7 +4,7 @@ Linux下安装
 ### 但是仅仅支持netctl+systemd的组合，换句话说，默认只支持archlinux.. #####
 ### 不过最新版Ubuntu应该也是可以安装的netctl的 ######
 
-非Archlinux下安装netctl
+非Archlinux下安装netctl:
     git clone git://projects.archlinux.org/netctl.git
 		cd netctl
 		make install
