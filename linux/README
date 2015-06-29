@@ -1,18 +1,18 @@
 Linux下安装
 ================
-### 本来这个软件只能生成用户名密码，现在我增加了自动连接的指令 ######
-### 但是仅仅支持netctl+systemd的组合，换句话说，默认只支持archlinux.. #####
-### 不过最新版Ubuntu应该也是可以安装的netctl的 ######
+* 本来这个软件只能生成用户名密码，现在我增加了自动连接的指令 
+* 但是仅仅支持netctl+systemd的组合，换句话说，默认只支持archlinux.. 
+* 不过最新版Ubuntu应该也是可以安装的netctl的 
 
 非Archlinux下安装netctl:
-    git clone git://projects.archlinux.org/netctl.git
-		cd netctl
-		make install
-		#下面两行为安装自动补全支持可以不执行
-		install -D -m644 contrib/bash-completion "/usr/share/bash-completion/completions/netctl"
-		install -D -m644 contrib/zsh-completion "/usr/share/zsh/site-functions/_netctl"
+	git clone git://projects.archlinux.org/netctl.git
+	cd netctl
+	make install
+	#下面两行为安装自动补全支持可以不执行
+	install -D -m644 contrib/bash-completion "/usr/share/bash-completion/completions/netctl"
+	install -D -m644 contrib/zsh-completion "/usr/share/zsh/site-functions/_netctl"
 安装CMCC:
-		mkdir build && cd build
+	mkdir build && cd build
 		../configure --prefix=/usr/share
 		make
 		# make install
