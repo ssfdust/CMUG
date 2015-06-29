@@ -40,12 +40,12 @@ Linux下安装
     # make unistall
 
 ### 使用：#
-* 初次使用：
+#####初次使用：###
     cmug -i INTERFACE
     cmug -u USERNAME -i INTERFACE -p PASSWORD -s SCHOOL_NUMBER
-* 创建新用户：
+#####创建新用户：###
     cmug -n -i INTERFACE
     cmug -u USERNAME -i INTERFACE -p PASSWORD -s SCHOOL_NUMBER
-* 利用systemd自动脚本：
+#####利用systemd自动脚本：####
     # systemctl start cmcc@INTERFACE  #连接
     # systemctl stop cmcc@INTERFACE   #关闭
