@@ -32,12 +32,12 @@ Linux下安装
     git clone https://github.com/ssfdust/CMUG.git
     cd linux
     mkdir build && cd build
-		../configure --prefix=/usr/share
-		make
-		# make install
+    ../configure --prefix=/usr/share
+    make
+    # make install
 
 ### 卸载CMCC：#
-		# make unistall
+    # make unistall
 
 ### 使用：#
 * 初次使用：
