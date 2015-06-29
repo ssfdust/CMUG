@@ -3,7 +3,7 @@
 #define CHOICE 6
 typedef struct nuser {
     char username[STRLEN];
-    int school;
+    int school = 0;
     char passwd[PASSWD];
 } user;
 

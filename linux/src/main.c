@@ -43,10 +43,14 @@ int main(int argc, char *argv[])
         puts("请输入密码：");
         scanf("%s", &newuser.passwd);
 			}
+			while (newuser->school > 6
+					|| newuser->school < 1)
+			{
         puts("选择校区(1-6)");
         for (ct = 0;ct < CHOICE;ct++)
             puts(menu[ct]);
         scanf("%d", &newuser.school);
+			}
     }
     else
     {
@@ -100,13 +104,14 @@ int parse_options(int argc, char * argv[], user * newuser)
 {
 	int opt;
 	int option_index = 0;
-	char * optstring = "u:p:i:nh";
+	char * optstring = "u:p:i:ns:h";
 	static const struct option opts[] = 
 	{
 		{"user", required_argument, 0, 'U'},
 		{"passwd", required_argument, 0, 'P'},
 		{"interface", required_argument, 0, 'I'},
 		{"new", no_argument, 0, 'N'},
+		{"schoolnum", required_argument, 0, 'S'},
 		{"help", no_argument, 0, 'H'},
 		{0, 0, 0, 0}
 	};
@@ -136,6 +141,9 @@ int parse_opt(int opt, user * newuser)
 						 break;
 		case 'N':
 		case 'n':remove(strcat(get_curpath(), "user.dat"));
+						 break;
+		case 'S':
+		case 's':newuser->school = aoti(optarg);
 						 break;
 		case 'H':
 		case 'h':usage();

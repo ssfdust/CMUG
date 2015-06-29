@@ -25,5 +25,6 @@ AC_FUNC_MALLOC
 AC_CHECK_FUNCS([ftime memset strstr])
 
 AC_OUTPUT([Makefile
+					  data/Makefile
 						src/Makefile
 						])
